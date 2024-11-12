@@ -7,8 +7,9 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
-          Navbar
+          Neida
         </Link>
+        {/* TODO: agregar icono */}
         <button
           className="navbar-toggler"
           type="button"
@@ -23,15 +24,21 @@ function Navbar() {
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div className="navbar-nav">
             <Link className="nav-link" to="/">
-              Home
+              Inicio
             </Link>
             <Link className="nav-link" to="/about">
-              About
+              Acerca de
             </Link>
             <Link className="nav-link" to="/categories">
-              Categories
+              Categorías
             </Link>
-            <span className="nav-link disabled">Disabled</span>
+            <Link className="nav-link" to="/store">
+              Tienda
+            </Link>
+            <Link className="nav-link" to="/contact">
+              Contacto
+            </Link>
+            {/* <span className="nav-link disabled">Disabled</span> */}
           </div>
         </div>
       </div>
