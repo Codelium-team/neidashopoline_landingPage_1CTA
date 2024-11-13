@@ -10,32 +10,3 @@ body,
   margin: 0;
   padding: 0;
 }
-
-body {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  background-color: #ffffff;
-  color: #212529;
-}
-
-a {
-  color: #007bff;
-  text-decoration: none;
-}
-a:hover {
-  color: #0056b3;
-}
-
-@media (max-width: 576px) {
-  .navbar-nav .nav-link {
-    padding: 0.5rem 1rem;
-  }
-  .navbar-collapse {
-    position: absolute;
-    top: 100%; /* Start just below the navbar */
-    left: 0;
-    right: 0;
-    background-color: white; /* Match the background color */
-    z-index: 1050; /* Ensure it overlays other content */
-    padding: 1rem;
-  }
-}

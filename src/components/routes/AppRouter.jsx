@@ -14,6 +14,7 @@ function AppRouter() {
       <Route path="/categories" element={<Categories />} />
       <Route path="/store" element={<Store />} />
       <Route path="/contact" element={<Contact />} />
+      {/* TODO Agregar 404 */}
     </Routes>
   );
 }

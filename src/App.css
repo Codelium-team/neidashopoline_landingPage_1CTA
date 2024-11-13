@@ -1,42 +1,161 @@
+/* Color Palette */
+:root {
+  /* Primary Colors */
+  --primary-light: #fbdbfb;
+  --primary-main: #ed12d1;
+  --primary-dark: #d41c28;
+
+  /* Secondary Colors */
+  --secondary-light: #faacf6;
+  --secondary-main: #a54d82;
+  --secondary-background: #faf4fc;
+
+  /* Text and Background Colors */
+  --text-color-dark: #333333;
+  --text-color-light: #ffffff;
+
+  /* Neutral Background */
+  --neutral-background: #faf4fc;
+}
+
+/* General Layout Styling */
+
+body,
+html {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--neutral-background);
+  color: var(--text-color-dark);
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* Navbar Styling */
+.navbar {
+  background-color: var(--primary-light);
+  color: var(--text-color-dark);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar .nav-link {
+  font-size: 1em;
+  font-weight: normal;
+  transition: font-size 0.3s ease;
+  color: var(--text-color-dark);
+  padding: 0.5rem 1rem;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.navbar .nav-link.active-link {
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: font-size 0.3s ease;
+  color: var(--primary-dark);
 }
+
+.dropdown-menu {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  transform: translateY(-10px);
+}
+
+.dropdown-menu.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.dropdown-menu .dropdown-item.active-link {
+  font-weight: bold;
+  font-size: 1.1rem;
+  color: var(--primary-dark);
+}
+
+/* Dropdown styling */
+.dropdown-menu .subcategory {
+  padding-left: 1.5rem;
+}
+
+.dropdown-menu .subcategory .dropdown-item {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.subcategory .dropdown-item.active-link {
+  font-weight: bold;
+  font-size: 1rem;
+  color: var(--primary-dark);
+}
+
+.navbar .nav-link:hover {
+  color: var(--primary-dark);
+}
+
+.navbar .navbar-collapse .navbar-nav {
+  display: flex;
+  align-items: center; /* Center the links vertically */
+  height: 100%; /* Ensure it takes the full height of the navbar */
+}
+
+.navbar .navbar-nav .nav-link {
+  line-height: inherit; /* Ensure the link text doesn't affect navbar height */
+}
+
+/* Links */
+a {
+  color: var(--primary-main);
+  text-decoration: none;
+}
+
+a:hover {
+  color: var(--primary-dark);
+}
+
+/* Button Styling */
+button {
+  background-color: var(--primary-main);
+  color: var(--text-color-light);
+  border: none;
+  padding: 0.6em 1.2em;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Specific Component Styling */
 
 .card {
   padding: 2em;
+  background-color: var(--secondary-light);
+  border-radius: 8px;
 }
 
 .read-the-docs {
   color: #888;
+}
+
+/* Mobile Navbar Styling */
+@media (max-width: 576px) {
+  .navbar-nav .nav-link {
+    padding: 0.5rem 1rem;
+  }
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--primary-light);
+    z-index: 1050;
+    padding: 1rem;
+  }
 }
