@@ -1,0 +1,182 @@
+:root {
+  /* Primary Colors */
+  --primary-light: #fbdbfb;
+  --primary-main: #ed12d1;
+  --primary-dark: #d41c28;
+
+  /* Secondary Colors */
+  --secondary-light: #faacf6;
+  --secondary-main: #a54d82;
+  --secondary-background: #faf4fc;
+
+  /* Text and Background Colors */
+  --text-color-dark: #333333;
+  --text-color-light: #ffffff;
+
+  /* Neutral Background */
+  --neutral-background: #faf4fc;
+}
+
+.hero-image {
+  position: relative;
+}
+
+.hero-image::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.hero-text {
+  position: relative;
+  z-index: 2;
+  padding: 1rem;
+  border-radius: 5px;
+  max-width: 80%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.hero-image .attribution {
+  font-size: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  z-index: 3;
+}
+
+.hero-text h1,
+.hero-text p {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+}
+
+.hero-image .hero-text {
+  backdrop-filter: blur(2px);
+  padding: 2rem;
+  border-radius: 5px;
+}
+
+/* Base styles (for larger screens) */
+.attribution {
+  font-size: 0.875rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.attribution a {
+  text-decoration: underline;
+  color: white;
+}
+
+.attribution a:hover {
+  color: #f1c40f;
+}
+
+/* Button Styling */
+.button {
+  background-color: var(--primary-main);
+  color: var(--text-color-light);
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+/* Hover and Active States */
+.button:hover {
+  background-color: var(--primary-dark);
+}
+
+.button:active {
+  background-color: var(--secondary-main);
+  transform: scale(0.95);
+}
+
+/* Disabled State */
+.button:disabled {
+  background-color: var(--primary-light);
+  color: var(--text-color-dark);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* Mobile-specific styles */
+@media (max-width: 767px) {
+  .hero-image img {
+    height: 40vh;
+    object-fit: cover;
+  }
+
+  .hero-text h1 {
+    font-size: 1.5rem;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+  }
+
+  .bottom-section .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .bottom-section .col-12 {
+    margin-bottom: 1rem;
+  }
+
+  /* Adjust image size for mobile */
+  .bottom-section .col-12 img {
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .bottom-section .col-md-4 {
+    margin-bottom: 1rem;
+  }
+
+  .bottom-section .col-md-8 {
+    margin-bottom: 1rem;
+  }
+
+  /* Stack the images vertically */
+  .bottom-section .col-4 {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 1rem;
+  }
+
+  /* Ensure the attribution text is legible and well-placed */
+  .attribution {
+    font-size: 0.75rem;
+    padding: 0.3rem;
+  }
+
+  .attribution a {
+    font-size: 0.75rem;
+  }
+
+  .hero-text {
+    max-width: 95%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .hero-text h1 {
+    font-size: 1.6rem;
+    line-height: 1.3;
+  }
+
+  .hero-text p {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 0;
+  }
+}
