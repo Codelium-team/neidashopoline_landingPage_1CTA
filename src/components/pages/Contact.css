@@ -1,0 +1,76 @@
+/* Apply color palette from :root */
+
+.text-primary-main {
+  color: var(--primary-main);
+}
+
+.text-dark {
+  color: var(--text-color-dark);
+}
+
+.text-light {
+  color: var(--text-color-light);
+}
+
+.form-control {
+  border: 1px solid var(--primary-main);
+}
+
+form {
+  background-color: var(--neutral-background);
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+form input,
+form select,
+form textarea {
+  margin-bottom: 15px;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+/* Left Text Content */
+.left-text-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100%;
+}
+
+/* Optional: Add some margin for spacing */
+.left-text-content h1,
+.left-text-content p {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+/* Contact Form Button */
+button.btn-primary-main {
+  background-color: var(--primary-main);
+  color: var(--text-color-light);
+  border: 1px solid var(--primary-dark);
+  padding: 10px 20px;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 1.1rem;
+  transition: background-color 0.3s ease;
+}
+
+button.btn-primary-main:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-main);
+}
+
+/* Additional padding for mobile responsiveness */
+@media (max-width: 767px) {
+  .col-md-6 {
+    margin-bottom: 20px;
+  }
+}

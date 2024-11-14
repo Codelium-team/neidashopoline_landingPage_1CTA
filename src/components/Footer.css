@@ -1,0 +1,31 @@
+.footer {
+  background-color: var(--secondary-background);
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-icons {
+  margin-bottom: 10px;
+}
+
+.social-icon {
+  font-size: 12px;
+  color: var(--primary-main);
+  margin: 0 10px;
+  transition: color 0.3s ease;
+}
+
+.social-icon:hover {
+  color: var(--primary-dark);
+}
+
+.footer-copyright p {
+  font-size: 14px;
+  color: var(--text-color-dark);
+  margin-top: 10px;
+}

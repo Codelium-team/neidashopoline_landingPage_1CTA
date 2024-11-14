@@ -5,6 +5,7 @@ import Navbar from "./components/Navbar";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
 import "./App.css";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Navbar />
 
       <AppRouter />
+      <Footer />
     </Router>
   );
 }
