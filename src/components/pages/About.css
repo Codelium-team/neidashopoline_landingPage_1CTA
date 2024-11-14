@@ -1,0 +1,140 @@
+/* About Section Layout */
+.about-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2rem;
+  gap: 1rem;
+}
+
+/* Image Styling */
+.about-image {
+  flex: 1 1 30%;
+  max-width: 30%;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* Content Styling */
+.about-content {
+  flex: 1 1 65%;
+  max-width: 65%;
+  text-align: left;
+}
+
+.about-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: var(--primary-main);
+}
+
+/* Quote/Subheading Styling */
+.about-quote {
+  font-size: 1.1rem;
+  color: var(--text-color-dark);
+  font-style: italic;
+  margin-bottom: 1rem;
+  opacity: 0.8;
+}
+
+/* Emphasis Styling */
+.about-emphasis {
+  font-size: 1.2rem;
+  color: var(--primary-dark);
+  font-style: italic;
+  font-weight: bold;
+  margin-top: 1.5rem;
+}
+
+/* Button Styling */
+.comprar-button {
+  background-color: var(--primary-main);
+  color: var(--text-color-light);
+  margin-left: auto;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.comprar-button:hover {
+  background-color: var(--primary-dark);
+}
+
+.comprar-button:active {
+  background-color: var(--secondary-main);
+  transform: scale(0.95);
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.attribution {
+  font-size: 0.875rem;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 0.5rem;
+  border-radius: 3px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  z-index: 10;
+  position: relative;
+}
+
+.attribution a {
+  text-decoration: underline;
+  color: white;
+}
+
+.attribution a:hover {
+  color: #f1c40f;
+}
+/* Responsive Design */
+@media (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+  }
+
+  .about-image,
+  .about-content {
+    max-width: 100%;
+    max-height: 30%;
+    flex: 1 1 100%;
+  }
+
+  .about-content h2 {
+    font-size: 1.1rem;
+  }
+
+  .about-content p {
+    font-size: 0.9rem;
+    text-align: left;
+  }
+
+  .about-image img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+  }
+
+  .about-content {
+    text-align: left;
+    padding: 1rem;
+  }
+
+  .comprar-button {
+    margin-top: 0;
+    align-self: flex-start;
+  }
+
+  .about-image .attribution {
+    font-size: 0.75rem;
+    padding: 0.3rem;
+  }
+}
