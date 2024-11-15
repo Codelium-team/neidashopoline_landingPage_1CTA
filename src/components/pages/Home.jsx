@@ -6,6 +6,7 @@ import heroImage from "../../assets/maxeylash-JNuPhasKGbU-unsplash.png";
 import categoryImage1 from "../../assets/content-pixie-9l7r-n1zt-Y-unsplash.png";
 import categoryImage2 from "../../assets/ajeet-panesar-4CYxeonhkxY-unsplash.png";
 import categoryImage3 from "../../assets/pranav-kumar-jain-RkGKrMMRED4-unsplash.png";
+import logo from "../../../public/logo.svg"; // Import your SVG logo
 
 function Home() {
   return (
@@ -20,12 +21,19 @@ function Home() {
             style={{ height: "55vh", objectFit: "cover" }}
           />
           <div className="hero-text position-absolute top-50 start-50 translate-middle text-center text-white">
-            <h1>Bienvenido a Neida Shop</h1>
-            <p>
-              Tu espacio para encontrar desde antojos irresistibles hasta
-              productos de belleza y calzado de calidad. Descubre nuestras
-              categorías cuidadosamente seleccionadas para ti.
-            </p>
+            <div className="d-flex flex-column align-items-center">
+              <div className="logo-hero">
+                <img src={logo} alt="Logo" className="hero-logo mb-3" />{" "}
+              </div>
+              <div className="hero-text-content text-center">
+                <h1>Bienvenido a Neida Shop</h1>
+                <p>
+                  Tu espacio para encontrar desde antojos irresistibles hasta
+                  productos de belleza y calzado de calidad. Descubre nuestras
+                  categorías cuidadosamente seleccionadas para ti.
+                </p>
+              </div>
+            </div>
           </div>
           <div className="attribution text-white position-absolute bottom-0 end-0 p-2">
             Foto de{" "}
@@ -47,7 +55,8 @@ function Home() {
       <div className="container-fluid bottom-section py-3">
         <div className="row g-2">
           <div className="col-md-4 col-12 d-flex flex-column justify-content-center align-items-center text-center">
-            <p className="mb-2">Explora nuestros productos</p>
+            <p className="mb-2 explore-text">Explora nuestros productos</p>
+
             <button className="btn btn-primary button">Comprar</button>
           </div>
 
@@ -60,7 +69,7 @@ function Home() {
                 className="img-fluid w-100"
                 style={{
                   objectFit: "cover",
-                  height: "200px", // Adjust height to create square aspect ratio
+                  height: "200px",
                 }}
               />
               <div className="attribution text-white position-absolute bottom-0 end-0 p-2">
@@ -85,7 +94,7 @@ function Home() {
                 className="img-fluid w-100"
                 style={{
                   objectFit: "cover",
-                  height: "200px", // Adjust height to create square aspect ratio
+                  height: "200px",
                 }}
               />
               <div className="attribution text-white position-absolute bottom-0 end-0 p-2">

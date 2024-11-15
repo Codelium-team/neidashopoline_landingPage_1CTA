@@ -1,0 +1,75 @@
+/* Set all category cards to have the same minimum height */
+.category-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Fill available height */
+  min-height: 600px;
+  background-color: var(--primary-light);
+  color: var(--text-color-dark);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.category-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: var(--primary-dark);
+}
+
+.card-text {
+  font-size: 1rem;
+  color: var(--text-color-dark);
+}
+
+/* Button styling */
+.btn-primary {
+  background-color: var(--primary-main);
+  border-color: var(--primary-dark);
+  width: 100%;
+  font-size: 1rem;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+  border-color: var(--primary-dark);
+}
+
+.card-img-top {
+  height: 200px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.row {
+  display: flex;
+  align-items: stretch;
+}
+
+@media (max-width: 767px) {
+  /* Mobile view adjustments */
+  .row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .category-card {
+    margin-bottom: 15px;
+    min-height: auto;
+  }
+}

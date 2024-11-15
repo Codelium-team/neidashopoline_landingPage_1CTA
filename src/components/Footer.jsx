@@ -30,7 +30,7 @@ function Footer() {
           </a>
         </div>
         <div className="footer-copyright">
-          <p>© 2024 Copyright: Codelium</p>
+          <p>© 2024 Copyright Codelium</p>
         </div>
       </div>
     </footer>
