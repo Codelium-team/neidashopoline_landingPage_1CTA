@@ -1,6 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, NavLink } from "react-router-dom";
+import logo from "../../public/logo.svg";
 import "./Navbar.css";
 
 function Navbar() {
@@ -8,6 +9,7 @@ function Navbar() {
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
         <Link className="navbar-brand" to="/">
+          <img src={logo} alt="Neida Shop Logo" className="navbar-logo" />
           Neida Shop
         </Link>
         <button

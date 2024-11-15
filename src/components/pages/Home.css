@@ -9,7 +9,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.4); /* Adjust the opacity here */
   z-index: 1;
 }
 
@@ -20,144 +20,149 @@
   border-radius: 5px;
   max-width: 80%;
   margin: 0 auto;
-  padding: 0 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 1rem; /* Add margin to separate logo from text */
+  z-index: 0; /* Ensure logo stays behind text */
 }
 
 .hero-image .attribution {
   font-size: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(
+    0,
+    0,
+    0,
+    0.5
+  ); /* Maintain background opacity for attribution */
   border-radius: 3px;
   z-index: 3;
 }
 
+.hero-text-content {
+  text-align: center;
+}
+
 .hero-text h1,
 .hero-text p {
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add text shadow to maintain visibility */
 }
 
 .hero-image .hero-text {
   backdrop-filter: blur(2px);
   padding: 2rem;
   border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* Base styles (for larger screens) */
-.attribution {
-  font-size: 0.875rem;
+.hero-text-content {
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 2rem;
+}
+
+.hero-text p {
+  font-size: 1.2rem;
+}
+/* Bottom Section Styles */
+.bottom-section {
+  padding: 3rem 1rem;
+}
+
+.bottom-section .row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.bottom-section .col-12 {
+  text-align: center;
+  padding: 1rem;
+}
+
+.bottom-section .col-md-4 {
+  flex: 1 1 calc(33.333% - 1rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-section .col-md-8 {
+  flex: 1 1 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0;
+}
+
+.bottom-section .explore-text {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.bottom-section .button {
+  font-size: 1rem;
+  padding: 0.8rem 1.5rem;
+  width: 60%;
+  border-radius: 5px;
+}
+
+/* Adjust Images */
+.bottom-section .col-12 img {
+  object-fit: cover;
+  width: 100%;
+  height: 200px;
+  border-radius: 5px;
+}
+
+.bottom-section .col-md-4 .attribution {
+  position: absolute;
+  bottom: 0;
+  right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 0.5rem;
-  border-radius: 3px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  font-size: 0.8rem;
+  text-align: right;
+  border-radius: 0 0 5px 5px;
 }
 
-.attribution a {
-  text-decoration: underline;
+.bottom-section .col-md-4 .attribution a {
   color: white;
+  text-decoration: underline;
 }
 
-.attribution a:hover {
-  color: #f1c40f;
-}
-
-/* Button Styling */
-.button {
-  background-color: var(--primary-dark);
-  color: var(--text-color-light);
-  padding: 0.75rem 1.5rem;
-  border: none;
-  border-radius: 5px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-/* Hover and Active States */
-.button:hover {
-  background-color: var(--primary-dark);
-}
-
-.button:active {
-  background-color: var(--secondary-main);
-  transform: scale(0.95);
-}
-
-/* Disabled State */
-.button:disabled {
-  background-color: var(--primary-light);
-  color: var(--text-color-dark);
-  cursor: not-allowed;
-  opacity: 0.7;
-}
-
-/* Mobile-specific styles */
+/* Mobile-specific adjustments */
 @media (max-width: 767px) {
-  .hero-image img {
-    height: 40vh;
-    object-fit: cover;
-  }
-
-  .hero-text h1 {
-    font-size: 1.5rem;
-  }
-
-  .hero-text p {
-    font-size: 1rem;
-  }
-
-  .bottom-section .row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .bottom-section .col-12 {
-    margin-bottom: 1rem;
-  }
-
-  /* Adjust image size for mobile */
-  .bottom-section .col-12 img {
-    height: 200px;
-    object-fit: cover;
-  }
-
   .bottom-section .col-md-4 {
+    flex: 1 1 100%;
     margin-bottom: 1rem;
   }
 
   .bottom-section .col-md-8 {
-    margin-bottom: 1rem;
+    display: block;
   }
 
-  /* Stack the images vertically */
-  .bottom-section .col-4 {
+  .bottom-section .explore-text {
+    font-size: 1.1rem;
+  }
+
+  .bottom-section .button {
     width: 100%;
-    height: 200px;
-    margin-bottom: 1rem;
+    padding: 1rem;
   }
 
-  /* Ensure the attribution text is legible and well-placed */
-  .attribution {
-    font-size: 0.75rem;
-    padding: 0.3rem;
-  }
-
-  .attribution a {
-    font-size: 0.75rem;
-  }
-
-  .hero-text {
-    max-width: 95%;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .hero-text h1 {
-    font-size: 1.6rem;
-    line-height: 1.3;
-  }
-
-  .hero-text p {
-    font-size: 1rem;
-    line-height: 1.4;
-    padding: 0;
+  .bottom-section .col-12 img {
+    height: 180px;
   }
 }

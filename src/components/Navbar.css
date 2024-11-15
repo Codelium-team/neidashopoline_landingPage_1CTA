@@ -4,6 +4,23 @@
   color: var(--text-color-dark);
 }
 
+/* Navbar Brand Styling */
+.navbar-brand {
+  color: var(--brand-purple);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.navbar-brand:hover {
+  color: var(--primary-dark);
+}
+
+.navbar-brand:focus,
+.navbar-brand:active {
+  color: var(--brand-purple);
+  outline: none;
+}
+
 .navbar .nav-link {
   font-size: 1em;
   font-weight: normal;
@@ -66,6 +83,18 @@
 
 .navbar .navbar-nav .nav-link {
   line-height: inherit;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo {
+  height: 40px;
+  width: auto;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 /* Mobile Navbar Styling */
