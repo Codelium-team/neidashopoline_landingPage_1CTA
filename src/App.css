@@ -1,27 +1,23 @@
 /* Color Palette */
-:root {
-  /* Primary Colors */
+/* :root {
+
   --primary-light: #fbdbfb;
   --primary-main: #ed12d1;
   --primary-dark: #d41c28;
 
-  /* Secondary Colors */
   --secondary-light: #f8a8ae;
   --secondary-main: #a54d82;
   --secondary-background: #faf4fc;
 
-  /* Text and Background Colors */
   --text-color-dark: #333333;
   --text-color-light: #ffffff;
 
-  /* Neutral Background */
   --neutral-background: #faf4fc;
 
   --brand-purple: #ed12d1;
-}
+} */
 
-/* :root {
-
+:root {
   --primary-light: #f6e3f5;
   --primary-main: #9b4d96;
   --primary-dark: #6a2c6b;
@@ -36,7 +32,7 @@
   --neutral-background: #f5f5f5;
 
   --brand-purple: #ed12d1;
-} */
+}
 
 /* General Layout Styling */
 body,
