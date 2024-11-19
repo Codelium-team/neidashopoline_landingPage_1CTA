@@ -95,6 +95,59 @@
 .attribution a:hover {
   color: #f1c40f;
 }
+
+.newsletter-container {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.newsletter-form p {
+  font-size: 1.2rem;
+  color: var(--text-color-dark);
+  margin-bottom: 10px;
+}
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.newsletter-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.newsletter-input {
+  padding: 10px;
+  font-size: 1rem;
+  border: 1px solid var(--primary-main);
+  border-radius: 5px;
+  width: 250px;
+  box-sizing: border-box;
+  flex: 1 1 auto;
+}
+
+.newsletter-button {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: var(--primary-main);
+  color: var(--text-color-light);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.newsletter-button:hover {
+  background-color: var(--primary-dark);
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .about-section {
@@ -136,5 +189,16 @@
   .about-image .attribution {
     font-size: 0.75rem;
     padding: 0.3rem;
+  }
+
+  .form-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 15px;
+  }
+
+  .newsletter-input,
+  .newsletter-button {
+    width: 100%;
   }
 }

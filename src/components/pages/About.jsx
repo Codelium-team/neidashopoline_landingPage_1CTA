@@ -1,32 +1,20 @@
 import React from "react";
 import "./About.css";
-import categoryImage1 from "../../assets/content-pixie-9l7r-n1zt-Y-unsplash.png";
+import categoryImage1 from "../../assets/Foto_Neida_C.png";
 
 function About() {
   return (
     <div className="about-section">
       <div className="about-image">
-        <img src={categoryImage1} alt="Neida Shop" />
-        <div className="attribution text-white position-absolute bottom-0 end-0 p-2">
-          Foto de{" "}
-          <a
-            href="https://unsplash.com/es/@contentpixie"
-            className="text-white"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Content Pixie
-          </a>{" "}
-          en Unsplash
-        </div>
+        <img src={categoryImage1} alt="Neida Díaz" />
       </div>
 
       <div className="about-content">
         <h2>Sobre Neida Shop</h2>
         <p className="about-quote">
-          Neida Shop es el resultado del esfuerzo y pasión de Neida Díaz,
-          dedicada a ofrecer productos variados que abarcan desde fast food
-          hasta calzado de calidad.
+          Neida Shop es el resultado del esfuerzo y pasión de
+          <strong> Neida Díaz</strong>, dedicada a ofrecer productos variados
+          que abarcan desde fast food hasta calzado de calidad.
         </p>
         <p>
           Neida Shop se ha consolidado como una tienda pensada para satisfacer a
@@ -37,8 +25,25 @@ function About() {
         <p className="about-emphasis">
           Con Neida Shop, más que productos, encuentras calidad y dedicación.
         </p>
-        <div className="button-container">
-          <button className="comprar-button">Comprar</button>
+
+        {/* Newsletter Form */}
+        <div className="newsletter-container">
+          <form className="newsletter-form">
+            <p className="about-quote">
+              ¡Únete a nuestro newsletter y recibe nuestras últimas promociones
+              y productos en tu correo electrónico!
+            </p>
+            <div className="form-group">
+              <input
+                type="email"
+                placeholder="Tu correo electrónico"
+                className="newsletter-input"
+              />
+              <button type="submit" className="newsletter-button">
+                Recibe nuestro catálogo
+              </button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
