@@ -21,7 +21,12 @@ const Contact = () => {
 
   // Handle form submission
   const handleSubmit = async (e) => {
-    e.preventDefault(); // Prevent form reload
+    e.preventDefault();
+
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+      setResponseMessage("Por favor, ingresa un correo electrónico válido.");
+      return;
+    }
 
     try {
       const response = await fetch(ENDPOINT.submitContact, {
