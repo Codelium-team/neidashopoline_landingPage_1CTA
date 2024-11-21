@@ -1,5 +1,6 @@
 <?php
 include '../src/database.php';
+$config = include '../src/config.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -19,16 +20,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!empty($nombre) && !empty($email) && !empty($asunto) && !empty($mensaje)) {
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
             try {
-
                 $stmt = $pdo->prepare(
                     "INSERT INTO contacto (NOMBRES, EMAIL, ASUNTO, MENSAJE) VALUES (?, ?, ?, ?)"
                 );
-
                 $stmt->execute([$nombre, $email, $asunto, $mensaje]);
 
-                echo json_encode(['status' => 'success', 'message' => 'Message sent successfully.']);
+                // Email notification
+                $to = $config['owner_email'];
+                $subject = "Nuevo mensaje de contacto recibido";
+                $emailMessage = "
+                    Nombre: $nombre\n
+                    Correo Electrónico: $email\n
+                    Asunto: $asunto\n
+                    Mensaje:\n$mensaje
+                ";
+                $headers = "From: {$config['from_email']}";
+
+                if (mail($to, $subject, $emailMessage, $headers)) {
+                    echo json_encode(['status' => 'success', 'message' => 'Message sent successfully and email notification sent.']);
+                } else {
+                    echo json_encode(['status' => 'success', 'message' => 'Message sent successfully, but email notification failed.']);
+                }
             } catch (PDOException $e) {
-                echo json_encode(['status' => 'error', 'message' => 'Failed to send message: ' . $e->getMessage()]);
+                echo json_encode(['status' => 'error', 'message' => 'Failed to save data: ' . $e->getMessage()]);
             }
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Invalid email address.']);
