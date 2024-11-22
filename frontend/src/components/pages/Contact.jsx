@@ -1,7 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Contact.css";
+import { ENDPOINT } from "../../config/constants";
 
 const Contact = () => {
+  // Form state
+  const [formData, setFormData] = useState({
+    nombre: "",
+    email: "",
+    asunto: "",
+    mensaje: "",
+  });
+
+  const [responseMessage, setResponseMessage] = useState(null);
+
+  // Handle input change
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+
+  // Handle form submission
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
+      setResponseMessage("Por favor, ingresa un correo electrónico válido.");
+      return;
+    }
+
+    try {
+      const response = await fetch(ENDPOINT.submitContact, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(formData),
+      });
+
+      const result = await response.json();
+
+      if (result.status === "success") {
+        setResponseMessage("Tu mensaje se ha enviado exitosamente.");
+      } else {
+        setResponseMessage(
+          result.message || "Hubo un error al enviar el mensaje."
+        );
+      }
+    } catch (error) {
+      setResponseMessage(
+        "Error de red. Por favor, intenta de nuevo más tarde."
+      );
+    }
+  };
+
   return (
     <div className="container my-5">
       <div className="row">
@@ -25,6 +76,7 @@ const Contact = () => {
           <p className="text-dark">
             Teléfono: <strong>+123 456 7890</strong>
           </p>
+          {/* TODO: Cambiar el fono y email */}
           <p className="text-dark">
             Correo electrónico: <strong>contacto@neidashop.com</strong>
           </p>
@@ -32,17 +84,19 @@ const Contact = () => {
 
         {/* Right Side: Contact Form */}
         <div className="col-md-6">
-          <form>
+          <form onSubmit={handleSubmit}>
             <h2 className="text-primary-main">Formulario de Contacto</h2>
             <div className="mb-3">
               <label htmlFor="nombre" className="form-label text-dark">
-                Nombre
+                Nombre{" "}
               </label>
               <input
                 type="text"
                 className="form-control"
                 id="nombre"
                 placeholder="Tu nombre completo"
+                value={formData.nombre}
+                onChange={handleChange}
               />
             </div>
             <div className="mb-3">
@@ -54,9 +108,11 @@ const Contact = () => {
                 className="form-control"
                 id="email"
                 placeholder="Tu correo electrónico"
+                value={formData.email}
+                onChange={handleChange}
               />
             </div>
-            <div className="mb-3">
+            {/*             <div className="mb-3">
               <label htmlFor="telefono" className="form-label text-dark">
                 Teléfono
               </label>
@@ -66,12 +122,17 @@ const Contact = () => {
                 id="telefono"
                 placeholder="Tu número de teléfono"
               />
-            </div>
+            </div> */}
             <div className="mb-3">
               <label htmlFor="asunto" className="form-label text-dark">
                 Asunto
               </label>
-              <select className="form-select" id="asunto">
+              <select
+                className="form-select"
+                id="asunto"
+                value={formData.asunto}
+                onChange={handleChange}
+              >
                 <option value="">Selecciona el asunto</option>
                 <option value="pregunta">Pregunta</option>
                 <option value="sugerencia">Sugerencia</option>
@@ -87,12 +148,18 @@ const Contact = () => {
                 id="mensaje"
                 rows="4"
                 placeholder="Escribe tu mensaje"
+                value={formData.mensaje}
+                onChange={handleChange}
               ></textarea>
             </div>
             <button type="submit" className="btn btn-primary-main">
               Enviar
             </button>
           </form>
+
+          {responseMessage && (
+            <div className="mt-4 alert alert-info">{responseMessage}</div>
+          )}
 
           <div className="mt-4"></div>
         </div>

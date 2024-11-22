@@ -22,7 +22,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-db_config.php
-/backend/.env
-/backend/config/db_config.php
-/backend/config/config.php
