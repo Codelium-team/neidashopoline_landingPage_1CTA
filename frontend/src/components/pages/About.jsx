@@ -57,12 +57,8 @@ function About() {
     <div className="container-fluid about-section d-flex align-items-center justify-content-center">
       <div className="row w-100 align-items-center">
         {/* Image Section */}
-        <div className="col-md-4 mb-4 mb-md-0">
-          <img
-            src={categoryImage1}
-            alt="Neida Díaz"
-            className="img-fluid rounded shadow-sm"
-          />
+        <div className="col-md-4 mb-4 mb-md-0 about-image-container">
+          <img src={categoryImage1} alt="Neida Díaz" className="about-image" />
         </div>
 
         {/* Content Section */}
