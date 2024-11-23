@@ -6,6 +6,7 @@ function Footer() {
     <footer className="footer">
       <div className="footer-content">
         <div className="footer-icons">
+          {/* TODO: cambiar los links */}
           <a
             href="https://facebook.com"
             className="social-icon"

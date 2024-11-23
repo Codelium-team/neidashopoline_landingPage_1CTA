@@ -2,17 +2,20 @@ import React, { useState } from "react";
 import "./About.css";
 import categoryImage1 from "../../assets/Foto_Neida_C.png";
 import { ENDPOINT } from "../../config/constants";
+import Swal from "sweetalert2";
 
 function About() {
   const [email, setEmail] = useState("");
-  const [responseMessage, setResponseMessage] = useState("");
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Validate email
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      setResponseMessage("Por favor, ingresa un correo electrónico válido.");
+      Swal.fire({
+        icon: "error",
+        title: "Correo inválido",
+        text: "Por favor, ingresa un correo electrónico válido.",
+      });
       return;
     }
 
@@ -28,67 +31,82 @@ function About() {
       const data = await response.json();
 
       if (data.status === "success") {
-        setResponseMessage("¡Gracias por unirte a nuestro newsletter!");
+        Swal.fire({
+          icon: "success",
+          title: "¡Éxito!",
+          text: "¡Gracias por unirte a nuestro newsletter!",
+        });
         setEmail("");
       } else {
-        setResponseMessage(
-          data.message || "Ocurrió un error al enviar tu correo."
-        );
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: data.message || "Ocurrió un error al enviar tu correo.",
+        });
       }
     } catch (error) {
-      setResponseMessage("Hubo un error al intentar enviar tu correo.");
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Hubo un error al intentar enviar tu correo.",
+      });
     }
   };
 
   return (
-    <div className="about-section">
-      <div className="about-image">
-        <img src={categoryImage1} alt="Neida Díaz" />
-      </div>
+    <div className="container-fluid about-section d-flex align-items-center justify-content-center">
+      <div className="row w-100 align-items-center">
+        {/* Image Section */}
+        <div className="col-md-4 mb-4 mb-md-0 about-image-container">
+          <img src={categoryImage1} alt="Neida Díaz" className="about-image" />
+        </div>
 
-      <div className="about-content">
-        <h2>Sobre Neida Shop</h2>
-        <p className="about-quote">
-          Neida Shop es el resultado del esfuerzo y pasión de
-          <strong> Neida Díaz</strong>, dedicada a ofrecer productos variados
-          que abarcan desde fast food hasta calzado de calidad.
-        </p>
-        <p>
-          Neida Shop se ha consolidado como una tienda pensada para satisfacer a
-          todos los gustos, desde adultos hasta los más pequeños. Con una
-          selección de productos para cada necesidad, promovemos calidad,
-          accesibilidad y estilo en cada categoría.
-        </p>
-        <p className="about-emphasis">
-          Con Neida Shop, más que productos, encuentras calidad y dedicación.
-        </p>
-
-        {/* Newsletter Form */}
-        <div className="newsletter-container">
-          <form className="newsletter-form" onSubmit={handleSubmit}>
-            <p className="about-quote">
+        {/* Content Section */}
+        <div className="col-md-8 text-start">
+          {" "}
+          <h2 className="text-primary-main">Sobre Neida Shop</h2>
+          <p className="fst-italic ">
+            Neida Shop es el resultado del esfuerzo y pasión de{" "}
+            <strong>Neida Díaz</strong>, dedicada a ofrecer productos variados
+            que abarcan desde fast food hasta calzado de calidad.
+          </p>
+          <p>
+            Neida Shop se ha consolidado como una tienda pensada para satisfacer
+            a todos los gustos, desde adultos hasta los más pequeños. Con una
+            selección de productos para cada necesidad, promovemos calidad,
+            accesibilidad y estilo en cada categoría.
+          </p>
+          <p className="fw-bold fst-italic text-secondary">
+            Con Neida Shop, más que productos, encuentras calidad y dedicación.
+          </p>
+          {/* Newsletter Form */}
+          <div className="mt-4">
+            <p className="fst-italic">
               ¡Únete a nuestro newsletter y recibe nuestras últimas promociones
               y productos en tu correo electrónico!
             </p>
-            <div className="form-group">
+            <form
+              onSubmit={handleSubmit}
+              className="d-flex flex-column align-items-center"
+            >
               <input
                 type="email"
                 placeholder="Tu correo electrónico"
-                className="newsletter-input"
+                className="form-control"
+                style={{ width: "80%" }}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
               />
-              <button type="submit" className="newsletter-button">
+              <button
+                type="submit"
+                className="btn btn-primary"
+                style={{ width: "fit-content", padding: "0.5rem 1rem" }}
+              >
                 Recibe nuestro catálogo
               </button>
-            </div>
-          </form>
-
-          {/* Response Message */}
-          {responseMessage && (
-            <p className="response-message">{responseMessage}</p>
-          )}
+            </form>
+          </div>
         </div>
       </div>
     </div>

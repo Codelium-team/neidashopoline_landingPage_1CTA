@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Swal from "sweetalert2";
 import "./Contact.css";
 import { ENDPOINT } from "../../config/constants";
 
@@ -11,8 +12,6 @@ const Contact = () => {
     mensaje: "",
   });
 
-  const [responseMessage, setResponseMessage] = useState(null);
-
   // Handle input change
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -23,8 +22,33 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Validate email
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
-      setResponseMessage("Por favor, ingresa un correo electrónico válido.");
+      Swal.fire({
+        icon: "error",
+        title: "Correo inválido",
+        text: "Por favor, ingresa un correo electrónico válido.",
+      });
+      return;
+    }
+
+    // Validate subject
+    if (!formData.asunto) {
+      Swal.fire({
+        icon: "error",
+        title: "Asunto no seleccionado",
+        text: "Por favor, selecciona un asunto para tu mensaje.",
+      });
+      return;
+    }
+
+    // Validate message body
+    if (!formData.mensaje.trim()) {
+      Swal.fire({
+        icon: "error",
+        title: "Mensaje vacío",
+        text: "El mensaje no puede estar vacío.",
+      });
       return;
     }
 
@@ -40,16 +64,30 @@ const Contact = () => {
       const result = await response.json();
 
       if (result.status === "success") {
-        setResponseMessage("Tu mensaje se ha enviado exitosamente.");
+        Swal.fire({
+          icon: "success",
+          title: "¡Mensaje enviado!",
+          text: "Tu mensaje se ha enviado exitosamente.",
+        });
+        setFormData({
+          nombre: "",
+          email: "",
+          asunto: "",
+          mensaje: "",
+        });
       } else {
-        setResponseMessage(
-          result.message || "Hubo un error al enviar el mensaje."
-        );
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: result.message || "Hubo un error al enviar el mensaje.",
+        });
       }
     } catch (error) {
-      setResponseMessage(
-        "Error de red. Por favor, intenta de nuevo más tarde."
-      );
+      Swal.fire({
+        icon: "error",
+        title: "Error de red",
+        text: "Por favor, intenta de nuevo más tarde.",
+      });
     }
   };
 
@@ -66,8 +104,7 @@ const Contact = () => {
           <p className="text-dark">
             Por favor, completa el formulario para enviarnos tus comentarios o
             preguntas. Selecciona el motivo de tu mensaje para que nuestro
-            equipo pueda asistirte de forma rápida y precisa. No dudes en
-            detallar tus necesidades, estamos aquí para ayudarte.
+            equipo pueda asistirte de forma rápida y precisa.
           </p>
           <p className="text-dark">
             Si prefieres contactarnos de forma directa, puedes llamarnos o
@@ -76,7 +113,6 @@ const Contact = () => {
           <p className="text-dark">
             Teléfono: <strong>+123 456 7890</strong>
           </p>
-          {/* TODO: Cambiar el fono y email */}
           <p className="text-dark">
             Correo electrónico: <strong>contacto@neidashop.com</strong>
           </p>
@@ -88,7 +124,7 @@ const Contact = () => {
             <h2 className="text-primary-main">Formulario de Contacto</h2>
             <div className="mb-3">
               <label htmlFor="nombre" className="form-label text-dark">
-                Nombre{" "}
+                Nombre
               </label>
               <input
                 type="text"
@@ -112,17 +148,6 @@ const Contact = () => {
                 onChange={handleChange}
               />
             </div>
-            {/*             <div className="mb-3">
-              <label htmlFor="telefono" className="form-label text-dark">
-                Teléfono
-              </label>
-              <input
-                type="tel"
-                className="form-control"
-                id="telefono"
-                placeholder="Tu número de teléfono"
-              />
-            </div> */}
             <div className="mb-3">
               <label htmlFor="asunto" className="form-label text-dark">
                 Asunto
@@ -156,12 +181,6 @@ const Contact = () => {
               Enviar
             </button>
           </form>
-
-          {responseMessage && (
-            <div className="mt-4 alert alert-info">{responseMessage}</div>
-          )}
-
-          <div className="mt-4"></div>
         </div>
       </div>
     </div>

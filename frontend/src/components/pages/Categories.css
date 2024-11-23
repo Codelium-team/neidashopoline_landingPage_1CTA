@@ -50,7 +50,7 @@
 }
 
 .card-img-top {
-  height: 200px;
+  height: 350px;
   object-fit: cover;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
@@ -59,6 +59,42 @@
 .row {
   display: flex;
   align-items: stretch;
+}
+
+/* SweetAlert2 Custom Styles */
+.custom-swal-popup {
+  font-family: "Arial", sans-serif;
+  max-width: 600px;
+}
+
+.custom-swal-popup p {
+  margin: 0;
+  text-align: justify; /* Align text to justify */
+  color: #333; /* Dark text color for better readability */
+  line-height: 1.6;
+}
+
+.custom-swal-actions {
+  display: flex;
+  justify-content: space-between; /* Space out buttons */
+  gap: 10px; /* Add space between buttons */
+}
+
+.swal2-confirm {
+  background-color: var(--primary-main);
+  border-color: var(--primary-dark);
+  color: white;
+}
+
+.swal2-cancel {
+  background-color: var(--primary-light);
+  border-color: var(--primary-dark);
+  color: var(--text-color-dark);
+}
+
+.swal2-confirm:hover,
+.swal2-cancel:hover {
+  opacity: 0.9;
 }
 
 @media (max-width: 767px) {
@@ -71,5 +107,21 @@
   .category-card {
     margin-bottom: 15px;
     min-height: auto;
+  }
+
+  .custom-swal-popup {
+    font-size: 14px; /* Smaller font for very small devices */
+    width: 90% !important; /* Ensure the popup fits within smaller screens */
+    max-width: 400px; /* Limit the max width */
+  }
+
+  .custom-swal-actions .swal2-actions button {
+    width: 100%; /* Stack buttons vertically */
+    margin: 5px 0; /* Add spacing between buttons */
+  }
+
+  /* Add spacing between buttons */
+  .custom-swal-actions .swal2-actions button {
+    margin: 0 5px;
   }
 }
