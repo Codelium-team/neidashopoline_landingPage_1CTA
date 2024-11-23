@@ -12,8 +12,9 @@ function App() {
   return (
     <Router>
       <Navbar />
-
-      <AppRouter />
+      <main>
+        <AppRouter />
+      </main>
       <Footer />
       <WhatsAppButton />
     </Router>

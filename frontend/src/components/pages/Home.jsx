@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "../../App.css";
 import "./Home.css";
@@ -6,7 +7,7 @@ import heroImage from "../../assets/maxeylash-JNuPhasKGbU-unsplash.png";
 import categoryImage1 from "../../assets/content-pixie-9l7r-n1zt-Y-unsplash.png";
 import categoryImage2 from "../../assets/ajeet-panesar-4CYxeonhkxY-unsplash.png";
 import categoryImage3 from "../../assets/pranav-kumar-jain-RkGKrMMRED4-unsplash.png";
-import logo from "../../../public/logo.svg"; // Import your SVG logo
+import logo from "../../../public/logo.svg";
 
 function Home() {
   return (
@@ -54,12 +55,25 @@ function Home() {
       {/* Bottom Section */}
       <div className="container-fluid bottom-section py-3">
         <div className="row g-2">
-          <div className="col-md-4 col-12 d-flex flex-column justify-content-center align-items-center text-center">
+          <div>
             <p className="mb-2 explore-text">Explora nuestros productos</p>
-
-            <button className="btn btn-primary button">Comprar</button>
+            <Link to="/categories">
+              <button
+                className="btn btn-primary button"
+                style={{
+                  width: "50%",
+                  maxWidth: "300px",
+                  padding: "1rem 2rem",
+                  fontSize: "1rem",
+                  borderRadius: "5px",
+                  margin: "0 auto",
+                  textAlign: "center",
+                }}
+              >
+                Comprar
+              </button>
+            </Link>
           </div>
-
           <div className="col-md-8 col-12 d-flex flex-column flex-md-row justify-content-around">
             {/* Image 1 */}
             <div className="col-12 col-md-4 position-relative mb-3">

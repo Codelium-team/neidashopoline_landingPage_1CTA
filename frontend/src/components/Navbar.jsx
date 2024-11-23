@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../../public/logo.svg";
 import "./Navbar.css";
 
 function Navbar() {
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+
+  const toggleDropdown = () => setIsDropdownOpen(!isDropdownOpen);
+
+  const handleLinkClick = () => {
+    if (isDropdownOpen) {
+      setIsDropdownOpen(false); // Close the dropdown when a link is clicked
+    }
+  };
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <div className="container-fluid">
@@ -52,17 +62,22 @@ function Navbar() {
                 id="navbarDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
-                aria-expanded="false"
+                aria-expanded={isDropdownOpen ? "true" : "false"}
+                onClick={toggleDropdown}
               >
                 Categorías
               </NavLink>
-              <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
+              <ul
+                className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}
+                aria-labelledby="navbarDropdown"
+              >
                 <li>
                   <NavLink
                     className={({ isActive }) =>
                       isActive ? "dropdown-item active-link" : "dropdown-item"
                     }
-                    to="/categories"
+                    to="/categories?category=Comida%20Rápida"
+                    onClick={handleLinkClick}
                   >
                     Fast Food (Comida Rápida)
                   </NavLink>
@@ -72,7 +87,8 @@ function Navbar() {
                     className={({ isActive }) =>
                       isActive ? "dropdown-item active-link" : "dropdown-item"
                     }
-                    to="/categories"
+                    to="/categories?category=Belleza"
+                    onClick={handleLinkClick}
                   >
                     Artículos de Belleza
                   </NavLink>
@@ -84,7 +100,8 @@ function Navbar() {
                         ? "dropdown-item active-link small text-muted"
                         : "dropdown-item small text-muted"
                     }
-                    to="/categories"
+                    to="/categories?category=Belleza"
+                    onClick={handleLinkClick}
                   >
                     Hombre
                   </NavLink>
@@ -96,7 +113,8 @@ function Navbar() {
                         ? "dropdown-item active-link small text-muted"
                         : "dropdown-item small text-muted"
                     }
-                    to="/categories"
+                    to="/categories?category=Belleza"
+                    onClick={handleLinkClick}
                   >
                     Mujer
                   </NavLink>
@@ -106,7 +124,8 @@ function Navbar() {
                     className={({ isActive }) =>
                       isActive ? "dropdown-item active-link" : "dropdown-item"
                     }
-                    to="/categories"
+                    to="/categories?category=Calzado"
+                    onClick={handleLinkClick}
                   >
                     Calzado
                   </NavLink>
@@ -118,7 +137,8 @@ function Navbar() {
                         ? "dropdown-item active-link small text-muted"
                         : "dropdown-item small text-muted"
                     }
-                    to="/categories"
+                    to="/categories?category=Calzado"
+                    onClick={handleLinkClick}
                   >
                     Adultos
                   </NavLink>
@@ -130,7 +150,8 @@ function Navbar() {
                         ? "dropdown-item active-link small text-muted"
                         : "dropdown-item small text-muted"
                     }
-                    to="/categories"
+                    to="/categories?category=Calzado"
+                    onClick={handleLinkClick}
                   >
                     Niños
                   </NavLink>
