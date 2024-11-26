@@ -5,6 +5,7 @@ import About from "../pages/About";
 import Categories from "../pages/Categories";
 import Store from "../pages/Store";
 import Contact from "../pages/Contact";
+import NotFound from "../pages/NotFound";
 
 function AppRouter() {
   return (
@@ -14,7 +15,7 @@ function AppRouter() {
       <Route path="/categories" element={<Categories />} />
       <Route path="/store" element={<Store />} />
       <Route path="/contact" element={<Contact />} />
-      {/* TODO Agregar 404 */}
+      <Route path="*" element={<NotFound />} />
     </Routes>
   );
 }
