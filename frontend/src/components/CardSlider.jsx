@@ -1,42 +1,29 @@
-import React, { useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import "./CardSlider.css";
 import ProductCard from "./ProductCard";
+import { ENDPOINT } from "../config/constants";
 
 const CardSlider = () => {
   const sliderRef = useRef(null);
+  const [instagramPosts, setInstagramPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const products = [
-    {
-      image: "https://place.dog/600/400",
-      title: "Producto 1",
-      description: "Descripción del producto 1.",
-    },
-    {
-      image: "https://place.dog/600/400",
-      title: "Producto 2",
-      description: "Descripción del producto 2.",
-    },
-    {
-      image: "https://place.dog/600/400",
-      title: "Producto 3",
-      description: "Descripción del producto 3.",
-    },
-    {
-      image: "https://place.dog/600/400",
-      title: "Producto 4",
-      description: "Descripción del producto 4.",
-    },
-    {
-      image: "https://place.dog/600/400",
-      title: "Producto 5",
-      description: "Descripción del producto 5.",
-    },
-    {
-      image: "https://place.dog/600/400",
-      title: "Producto 6",
-      description: "Descripción del producto 6.",
-    },
-  ];
+  useEffect(() => {
+    const fetchInstagramUrls = async () => {
+      try {
+        const response = await fetch(ENDPOINT.instagramEmbed);
+        const data = await response.json();
+        console.log("Fetched Instagram URLs:", data);
+        setInstagramPosts(data);
+        setLoading(false);
+      } catch (error) {
+        console.error("Error fetching Instagram URLs:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchInstagramUrls();
+  }, []);
 
   const slideLeft = () => {
     sliderRef.current.scrollBy({ left: -300, behavior: "smooth" });
@@ -51,16 +38,19 @@ const CardSlider = () => {
       <button className="arrow left-arrow" onClick={slideLeft}>
         &#8592;
       </button>
-      <div className="card-slider" ref={sliderRef}>
-        {products.map((product, index) => (
-          <div key={index} className="card-slide">
-            <ProductCard
-              image={product.image}
-              title={product.title}
-              description={product.description}
-            />
-          </div>
-        ))}
+      <div
+        className={`card-slider ${loading ? "loading" : ""}`}
+        ref={sliderRef}
+      >
+        {loading ? (
+          <p>Cargando posts de Instagram...</p>
+        ) : (
+          instagramPosts.map((url, index) => (
+            <div key={index} className="card-slide">
+              <ProductCard image={url} />
+            </div>
+          ))
+        )}
       </div>
       <button className="arrow right-arrow" onClick={slideRight}>
         &#8594;

@@ -1,13 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const ProductCard = ({ image, title, description }) => {
+const ProductCard = ({ image }) => {
+  useEffect(() => {
+    if (image && image.includes("instagram.com")) {
+      window.instgrm.Embeds.process();
+    }
+  }, [image]);
+
   return (
     <div className="product-card">
-      <img src={image} alt={title} className="product-image" />
-      <div className="product-info">
-        <h5 className="product-title">{title}</h5>
-        <p className="product-description">{description}</p>
-      </div>
+      {image.includes("instagram.com") ? (
+        <blockquote
+          className="instagram-media"
+          data-instgrm-permalink={image}
+          data-instgrm-version="14"
+        ></blockquote>
+      ) : (
+        <img src={image} alt="Product" className="product-image" />
+      )}
     </div>
   );
 };
