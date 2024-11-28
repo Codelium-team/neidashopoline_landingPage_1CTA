@@ -1,5 +1,5 @@
 <?php
-include '../src/database.php';
+include '../src/conexiones.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -16,13 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
         try {
-
-            $stmt = $pdo->prepare("INSERT INTO acerca (CORREO, FECHA) VALUES (?, NOW())");
+            $stmt = $conn->prepare("INSERT INTO acerca (CORREO, FECHA) VALUES (?, NOW())");
             $stmt->execute([$email]);
 
             echo json_encode(['status' => 'success', 'message' => 'Email submitted successfully.']);
         } catch (PDOException $e) {
-
             http_response_code(500);
             echo json_encode(['status' => 'error', 'message' => 'Failed to submit email: ' . $e->getMessage()]);
         }

@@ -1,6 +1,5 @@
 import React from "react";
 /* import whatsappIcon from "../../assets/img/landing/social_12942283.svg"; */
-//TODO: Lo dejo aquí mientras, por ahora uso fontawesome ↑
 
 import "./WhatsAppButton.css";
 

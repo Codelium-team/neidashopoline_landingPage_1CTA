@@ -50,7 +50,7 @@ function About() {
                 title: "¡Éxito!",
                 text: "¡Gracias por unirte a nuestro newsletter!",
               });
-              setEmail(""); // Clear the email input field
+              setEmail("");
             } else {
               throw new Error("Error al enviar el mensaje.");
             }

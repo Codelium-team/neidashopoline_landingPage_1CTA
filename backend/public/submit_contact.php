@@ -1,5 +1,5 @@
 <?php
-include '../src/database.php';
+include '../src/conexiones.php';
 
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
@@ -22,7 +22,7 @@ try {
 
         if (!empty($nombre) && !empty($email) && !empty($asunto) && !empty($mensaje)) {
             if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $stmt = $pdo->prepare(
+                $stmt = $conn->prepare(
                     "INSERT INTO contacto (NOMBRES, EMAIL, ASUNTO, MENSAJE) VALUES (?, ?, ?, ?)"
                 );
                 $stmt->execute([$nombre, $email, $asunto, $mensaje]);
