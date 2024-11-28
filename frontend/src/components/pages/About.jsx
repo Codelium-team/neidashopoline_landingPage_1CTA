@@ -33,7 +33,7 @@ function About() {
 
       if (data.status === "success") {
         /* TODO: cambiar a mail de neida */
-        await fetch("https://formsubmit.co/esteban.l-jfs@codelium.cl", {
+        return fetch("https://formsubmit.co/esteban.l-jfs@codelium.cl", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",

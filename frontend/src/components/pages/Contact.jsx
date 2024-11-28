@@ -58,7 +58,7 @@ const Contact = () => {
 
       if (result.status === "success") {
         /* TODO: cambiar a mail de neida */
-        await fetch("https://formsubmit.co/esteban.l-jfs@codelium.cl", {
+        return fetch("https://formsubmit.co/esteban.l-jfs@codelium.cl", {
           method: "POST",
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -68,22 +68,33 @@ const Contact = () => {
             email: formData.email,
             subject: formData.asunto,
             message: formData.mensaje,
-            _captcha: "false",
+            _captcha: "false", // Disable captcha if not needed
           }),
-        });
-
-        Swal.fire({
-          icon: "success",
-          title: "¡Mensaje enviado!",
-          text: "Tu mensaje se ha enviado exitosamente.",
-        });
-
-        setFormData({
-          nombre: "",
-          email: "",
-          asunto: "",
-          mensaje: "",
-        });
+        })
+          .then((response) => {
+            if (response.ok) {
+              Swal.fire({
+                icon: "success",
+                title: "¡Éxito!",
+                text: "¡Gracias por unirte a nuestro newsletter!",
+              });
+              setFormData({
+                nombre: "",
+                email: "",
+                asunto: "",
+                mensaje: "",
+              });
+            } else {
+              throw new Error("Error al enviar el mensaje.");
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Hubo un problema al enviar tu mensaje. Inténtalo más tarde.",
+            });
+          });
       } else {
         Swal.fire({
           icon: "error",
