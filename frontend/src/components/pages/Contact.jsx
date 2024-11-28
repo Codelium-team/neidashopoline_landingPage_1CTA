@@ -4,7 +4,6 @@ import "./Contact.css";
 import { ENDPOINT } from "../../config/constants";
 
 const Contact = () => {
-  // Form state
   const [formData, setFormData] = useState({
     nombre: "",
     email: "",
@@ -12,17 +11,14 @@ const Contact = () => {
     mensaje: "",
   });
 
-  // Handle input change
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
-  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate email
     if (!formData.email || !/\S+@\S+\.\S+/.test(formData.email)) {
       Swal.fire({
         icon: "error",
@@ -32,7 +28,6 @@ const Contact = () => {
       return;
     }
 
-    // Validate subject
     if (!formData.asunto) {
       Swal.fire({
         icon: "error",
@@ -41,8 +36,6 @@ const Contact = () => {
       });
       return;
     }
-
-    // Validate message body
     if (!formData.mensaje.trim()) {
       Swal.fire({
         icon: "error",
@@ -64,17 +57,44 @@ const Contact = () => {
       const result = await response.json();
 
       if (result.status === "success") {
-        Swal.fire({
-          icon: "success",
-          title: "¡Mensaje enviado!",
-          text: "Tu mensaje se ha enviado exitosamente.",
-        });
-        setFormData({
-          nombre: "",
-          email: "",
-          asunto: "",
-          mensaje: "",
-        });
+        /* TODO: cambiar a mail de neida */
+        return fetch("https://formsubmit.co/esteban.l-jfs@codelium.cl", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            name: formData.nombre,
+            email: formData.email,
+            subject: formData.asunto,
+            message: formData.mensaje,
+            _captcha: "false", // Disable captcha if not needed
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              Swal.fire({
+                icon: "success",
+                title: "¡Éxito!",
+                text: "¡Gracias por unirte a nuestro newsletter!",
+              });
+              setFormData({
+                nombre: "",
+                email: "",
+                asunto: "",
+                mensaje: "",
+              });
+            } else {
+              throw new Error("Error al enviar el mensaje.");
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Hubo un problema al enviar tu mensaje. Inténtalo más tarde.",
+            });
+          });
       } else {
         Swal.fire({
           icon: "error",

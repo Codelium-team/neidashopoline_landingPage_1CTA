@@ -51,5 +51,3 @@ $urls = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
  <script async src="//www.instagram.com/embed.js"></script>
 </body>
 </html>
-
-<!-- TODO: Hay que proteger esta ruta en el deploy. -->

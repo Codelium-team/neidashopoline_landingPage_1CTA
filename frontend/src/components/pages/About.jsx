@@ -10,6 +10,7 @@ function About() {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // Validate email format
     if (!email || !/\S+@\S+\.\S+/.test(email)) {
       Swal.fire({
         icon: "error",
@@ -31,12 +32,36 @@ function About() {
       const data = await response.json();
 
       if (data.status === "success") {
-        Swal.fire({
-          icon: "success",
-          title: "¡Éxito!",
-          text: "¡Gracias por unirte a nuestro newsletter!",
-        });
-        setEmail("");
+        /* TODO: cambiar a mail de neida */
+        return fetch("https://formsubmit.co/esteban.l-jfs@codelium.cl", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+          },
+          body: new URLSearchParams({
+            email: email,
+            _captcha: "false",
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              Swal.fire({
+                icon: "success",
+                title: "¡Éxito!",
+                text: "¡Gracias por unirte a nuestro newsletter!",
+              });
+              setEmail("");
+            } else {
+              throw new Error("Error al enviar el mensaje.");
+            }
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: "error",
+              title: "Error",
+              text: "Hubo un problema al enviar tu mensaje. Inténtalo más tarde.",
+            });
+          });
       } else {
         Swal.fire({
           icon: "error",
@@ -63,7 +88,6 @@ function About() {
 
         {/* Content Section */}
         <div className="col-md-8 text-start">
-          {" "}
           <h2 className="text-primary-main">Sobre Neida Shop</h2>
           <p className="fst-italic ">
             Neida Shop es el resultado del esfuerzo y pasión de{" "}

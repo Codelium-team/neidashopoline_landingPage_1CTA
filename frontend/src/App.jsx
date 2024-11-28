@@ -10,7 +10,8 @@ import "./App.css";
 
 function App() {
   return (
-    <Router>
+    /* TODO: Sacar/cambiar el basename para deploy final */
+    <Router basename="/cuenta_pruebas/neidashop">
       <Navbar />
       <main>
         <AppRouter />

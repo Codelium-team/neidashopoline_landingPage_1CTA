@@ -1,5 +1,4 @@
 <?php
-// Allow CORS
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization");
@@ -8,9 +7,9 @@ header("Content-Type: application/json");
 $file = 'urls.json';
 $urls = file_exists($file) ? json_decode(file_get_contents($file), true) : [];
 
-// Handle POST requests to add a new URL
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $input = json_decode(file_get_contents('php://input'), true); // Decode JSON payload
+    $input = json_decode(file_get_contents('php://input'), true);
     $url = $input['url'] ?? null;
 
     if ($url && preg_match('/\/p\/([a-zA-Z0-9_-]+)/', $url, $matches)) {
@@ -31,13 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Return the list of URLs on GET requests
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo json_encode($urls);
     exit;
 }
 
-// Handle unsupported HTTP methods
 http_response_code(405);
 echo json_encode(["error" => "Method not allowed"]);
 exit;
