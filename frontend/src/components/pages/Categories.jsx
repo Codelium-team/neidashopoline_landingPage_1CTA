@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./Categories.css";
 import comidaImg from "../../assets/pranav-kumar-jain-RkGKrMMRED4-unsplash.png";
 import bellezaImg from "../../assets/content-pixie-9l7r-n1zt-Y-unsplash.png";
@@ -17,6 +17,7 @@ const MySwal = withReactContent(Swal);
 
 function Categories() {
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const category = new URLSearchParams(location.search).get("category");
@@ -26,7 +27,7 @@ function Categories() {
     }
   }, [location]);
   const handleViewMore = (category) => {
-    let title, htmlContent, link;
+    let title, htmlContent;
 
     switch (category) {
       case "Comida Rápida":
@@ -37,7 +38,6 @@ function Categories() {
           Perfectos para disfrutar en cualquier momento.
         </p>
       `;
-        link = "/contact";
         break;
 
       case "Belleza":
@@ -54,7 +54,6 @@ function Categories() {
           <h3>Mujer</h3>
           <h3>Precios</h3>
       `;
-        link = "/contact";
         break;
 
       case "Calzado":
@@ -87,7 +86,6 @@ function Categories() {
           <li><strong>Niña:</strong> $8.990</li>
         </ul>
       `;
-        link = "/contact";
         break;
 
       default:
@@ -95,7 +93,6 @@ function Categories() {
         htmlContent = `
         <p style="text-align: left;">Por favor selecciona una categoría válida.</p>
       `;
-        link = "/contact";
     }
 
     MySwal.fire({
@@ -110,9 +107,10 @@ function Categories() {
         popup: "custom-swal-popup",
         actions: "custom-swal-actions",
       },
-      preConfirm: () => {
-        window.location.href = link;
-      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        navigate("/contact");
+      }
     });
   };
 
