@@ -1,15 +1,22 @@
 import React, { useEffect } from "react";
+import "./ProductCard.css";
+
+const WHATSAPP_NUMBER = "56947184073";
+const WHATSAPP_MESSAGE = "¡Hola! Me interesa conocer más sobre sus productos.";
 
 const ProductCard = ({ image }) => {
+  const isInstagram = image && typeof image === 'string' && image.includes("instagram.com");
+  const whatsappLink = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
   useEffect(() => {
-    if (image && image.includes("instagram.com")) {
+    if (isInstagram && window.instgrm) {
       window.instgrm.Embeds.process();
     }
-  }, [image]);
+  }, [image, isInstagram]);
 
   return (
     <div className="product-card">
-      {image.includes("instagram.com") ? (
+      {isInstagram ? (
         <blockquote
           className="instagram-media"
           data-instgrm-permalink={image}
@@ -18,6 +25,16 @@ const ProductCard = ({ image }) => {
       ) : (
         <img src={image} alt="Product" className="product-image" />
       )}
+      <div className="product-card-cta">
+        <a
+          href={whatsappLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="btn-contactar"
+        >
+          <i className="fa-brands fa-whatsapp"></i> Contactar
+        </a>
+      </div>
     </div>
   );
 };

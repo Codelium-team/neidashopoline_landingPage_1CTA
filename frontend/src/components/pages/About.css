@@ -1,14 +1,15 @@
 /* About Section - Keeping full height and proper alignment */
 .about-section {
   padding: 2rem 1rem;
-  height: 100%;
+  min-height: 100%;
   position: relative;
   z-index: 1;
+  overflow: hidden;
 }
 
 .about-section .row {
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* Image Container - Center and maintain proportions */
@@ -17,48 +18,50 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40vw; 
-  height: 40vw;
-  max-width: 400px; 
-  max-height: 400px;
+  min-height: 350px;
   margin: 0 auto;
+  padding: 60px;
   background-color: transparent;
-  overflow: visible;
 }
 
 /* Image */
 .about-image {
-  width: 90%;
-  height: 90%;
+  width: 200px;
+  height: 200px;
   object-fit: cover;
   border-radius: 50%;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  z-index: 3; 
+  z-index: 3;
+  position: relative;
 }
 
 /* Pink Circle Background */
 .about-image-container::before {
   content: "";
   position: absolute;
-  width: 115%;
-  height: 115%;
+  width: 250px;
+  height: 250px;
   background-color: var(--primary-light); 
   border-radius: 50%;
   z-index: 1;
-  transform: translate(0, 0);
-  transition: transform 0.5s ease; /
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.5s ease;
 }
 
 /* Halo Circle Outline */
 .about-image-container::after {
   content: "";
   position: absolute;
-  width: 130%; 
-  height: 130%;
+  width: 290px;
+  height: 290px;
   border: 2px solid var(--brand-purple);
   border-radius: 50%;
   z-index: 2;
-  transform: translate(0, 0);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   transition: transform 0.5s ease, border-color 0.5s ease;
 }
 
@@ -69,11 +72,11 @@
 }
 
 .about-image-container:hover::before {
-  transform: scale(1.08);
+  transform: translate(-50%, -50%) scale(1.08);
 }
 
 .about-image-container:hover::after {
-  transform: scale(1.1); 
+  transform: translate(-50%, -50%) scale(1.1); 
   border-color: var(--primary-dark); 
 }
 
@@ -92,44 +95,49 @@
 /* Responsiveness */
 @media (max-width: 768px) {
   .about-image-container {
-    width: 60vw; 
-    height: 60vw;
-    margin-top: -2rem;
+    min-height: 280px;
+    padding: 40px;
   }
 
   .about-image {
-    width: 95%; 
-    height: 95%;
+    width: 160px; 
+    height: 160px;
   }
 
-  .about-image-container::before,
+  .about-image-container::before {
+    width: 200px;
+    height: 200px;
+  }
+  
   .about-image-container::after {
-    width: 100%;
-    height: 100%;
-    transform: translate(0, 0);
+    width: 230px;
+    height: 230px;
   }
 }
 
 @media (max-width: 576px) {
   .about-section {
-    padding-top: 4rem; 
+    padding-top: 1rem; 
   }
 
   .about-image-container {
-    width: 70vw; 
-    height: 70vw;
+    min-height: 220px;
+    padding: 30px;
   }
 
   .about-image {
-    width: 100%; 
-    height: 100%;
+    width: 130px; 
+    height: 130px;
   }
 
-  .about-image-container::before,
+  .about-image-container::before {
+    width: 165px;
+    height: 165px;
+  }
+  
   .about-image-container::after {
-    width: 110%; 
-    height: 110%;
-    transform: translate(0, 0); 
+    width: 190px;
+    height: 190px;
   }
 
   .about-section .row {
