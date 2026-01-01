@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import Swal from "sweetalert2";
 import "./Contact.css";
-import { ENDPOINT } from "../../config/constants";
+
+// Email destino para contacto (cambiar por el email de Neida en producción)
+const CONTACT_EMAIL = "esteban.l-jfs@codelium.cl";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -10,6 +12,7 @@ const Contact = () => {
     asunto: "",
     mensaje: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -45,69 +48,51 @@ const Contact = () => {
       return;
     }
 
+    setIsSubmitting(true);
+
     try {
-      const response = await fetch(ENDPOINT.submitContact, {
+      // Enviar directamente a FormSubmit.co (sin backend)
+      const response = await fetch(`https://formsubmit.co/ajax/${CONTACT_EMAIL}`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+          "Content-Type": "application/json",
+          "Accept": "application/json",
         },
-        body: new URLSearchParams(formData),
+        body: JSON.stringify({
+          name: formData.nombre,
+          email: formData.email,
+          subject: formData.asunto,
+          message: formData.mensaje,
+          _subject: `Contacto Neida Shop: ${formData.asunto}`,
+          _captcha: "false",
+        }),
       });
 
       const result = await response.json();
 
-      if (result.status === "success") {
-        /* TODO: cambiar a mail de neida */
-        return fetch("https://formsubmit.co/esteban.l-jfs@codelium.cl", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: new URLSearchParams({
-            name: formData.nombre,
-            email: formData.email,
-            subject: formData.asunto,
-            message: formData.mensaje,
-            _captcha: "false", // Disable captcha if not needed
-          }),
-        })
-          .then((response) => {
-            if (response.ok) {
-              Swal.fire({
-                icon: "success",
-                title: "¡Éxito!",
-                text: "¡Gracias por unirte a nuestro newsletter!",
-              });
-              setFormData({
-                nombre: "",
-                email: "",
-                asunto: "",
-                mensaje: "",
-              });
-            } else {
-              throw new Error("Error al enviar el mensaje.");
-            }
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Hubo un problema al enviar tu mensaje. Inténtalo más tarde.",
-            });
-          });
-      } else {
+      if (result.success) {
         Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: result.message || "Hubo un error al enviar el mensaje.",
+          icon: "success",
+          title: "¡Mensaje enviado!",
+          text: "Gracias por contactarnos. Te responderemos pronto.",
         });
+        setFormData({
+          nombre: "",
+          email: "",
+          asunto: "",
+          mensaje: "",
+        });
+      } else {
+        throw new Error("Error al enviar");
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
-        title: "Error de red",
-        text: "Por favor, intenta de nuevo más tarde.",
+        title: "Error",
+        text: "Hubo un problema al enviar tu mensaje. Inténtalo más tarde.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -197,8 +182,8 @@ const Contact = () => {
                 onChange={handleChange}
               ></textarea>
             </div>
-            <button type="submit" className="btn btn-primary-main">
-              Enviar
+            <button type="submit" className="btn btn-primary-main" disabled={isSubmitting}>
+              {isSubmitting ? "Enviando..." : "Enviar"}
             </button>
           </form>
         </div>

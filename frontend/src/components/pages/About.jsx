@@ -1,11 +1,14 @@
 import React, { useState } from "react";
 import "./About.css";
 import categoryImage1 from "../../assets/Foto_Neida_C.png";
-import { ENDPOINT } from "../../config/constants";
 import Swal from "sweetalert2";
+
+// Email destino para el newsletter (cambiar por el email de Neida en producción)
+const NEWSLETTER_EMAIL = "esteban.l-jfs@codelium.cl";
 
 function About() {
   const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -20,61 +23,43 @@ function About() {
       return;
     }
 
-    try {
-      const formData = new FormData();
-      formData.append("email", email);
+    setIsSubmitting(true);
 
-      const response = await fetch(ENDPOINT.submitEmail, {
+    try {
+      // Enviar directamente a FormSubmit.co (sin backend)
+      const response = await fetch(`https://formsubmit.co/ajax/${NEWSLETTER_EMAIL}`, {
         method: "POST",
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          email: email,
+          _subject: "Nuevo suscriptor al Newsletter - Neida Shop",
+          _captcha: "false",
+        }),
       });
 
       const data = await response.json();
 
-      if (data.status === "success") {
-        /* TODO: cambiar a mail de neida */
-        return fetch("https://formsubmit.co/esteban.l-jfs@codelium.cl", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/x-www-form-urlencoded",
-          },
-          body: new URLSearchParams({
-            email: email,
-            _captcha: "false",
-          }),
-        })
-          .then((response) => {
-            if (response.ok) {
-              Swal.fire({
-                icon: "success",
-                title: "¡Éxito!",
-                text: "¡Gracias por unirte a nuestro newsletter!",
-              });
-              setEmail("");
-            } else {
-              throw new Error("Error al enviar el mensaje.");
-            }
-          })
-          .catch((error) => {
-            Swal.fire({
-              icon: "error",
-              title: "Error",
-              text: "Hubo un problema al enviar tu mensaje. Inténtalo más tarde.",
-            });
-          });
-      } else {
+      if (data.success) {
         Swal.fire({
-          icon: "error",
-          title: "Error",
-          text: data.message || "Ocurrió un error al enviar tu correo.",
+          icon: "success",
+          title: "¡Éxito!",
+          text: "¡Gracias por unirte a nuestro newsletter!",
         });
+        setEmail("");
+      } else {
+        throw new Error("Error al enviar");
       }
     } catch (error) {
       Swal.fire({
         icon: "error",
         title: "Error",
-        text: "Hubo un error al intentar enviar tu correo.",
+        text: "Hubo un problema al enviar tu correo. Inténtalo más tarde.",
       });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -126,8 +111,9 @@ function About() {
                 type="submit"
                 className="btn btn-primary"
                 style={{ width: "fit-content", padding: "0.5rem 1rem" }}
+                disabled={isSubmitting}
               >
-                Recibe nuestro catálogo
+                {isSubmitting ? "Enviando..." : "Recibe nuestro catálogo"}
               </button>
             </form>
           </div>
